@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FixedBookings.BusinessObject\FixedBookings.BusinessObject.csproj" />
     <ProjectReference Include="..\FixedBookings.DataAccess\FixedBookings.DataAccess.csproj" />
   </ItemGroup>
 

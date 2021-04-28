@@ -1,7 +1,9 @@
+using FixedBookings.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +30,9 @@ namespace FixedBookingsAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<BookingManagmentDbContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("BookingManagmentConnection"), b => b.MigrationsAssembly("FixedBookings.Service.API")));
 
             services.AddSwaggerGen(options =>
             {
