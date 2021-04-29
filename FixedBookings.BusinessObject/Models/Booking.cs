@@ -13,5 +13,7 @@ namespace FixedBookings.BusinessObject.Models
         public string PhoneNumber { get; set; }
         public string CustomerName { get; set; }
         public string Comments { get; set; }
+        public DateTime CreationDate { get; set; }
+        public bool IsActive { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using FixedBookings.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FixedBookings.Service.API.Migrations
 {
     [DbContext(typeof(BookingManagmentDbContext))]
-    partial class BookingManagmentDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210429063401_booking_table_isactive")]
+    partial class booking_table_isactive
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

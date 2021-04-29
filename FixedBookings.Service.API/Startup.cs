@@ -1,3 +1,5 @@
+using FixedBookings.BusinessLogic.Services;
+using FixedBookings.BusinessObject.Interfaces;
 using FixedBookings.DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,19 +33,13 @@ namespace FixedBookingsAPI
         {
             services.AddControllers();
 
+
             services.AddDbContext<BookingManagmentDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("BookingManagmentConnection"), b => b.MigrationsAssembly("FixedBookings.Service.API")));
 
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1",
-                new Microsoft.OpenApi.Models.OpenApiInfo
-                {
-                    Title = "Swagger Demo API",
-                    Description = "Demo API for showing Swagger",
-                    Version = "v1"
-                });
-            });
+            services.AddScoped<IBookingService, BookingService>();
+
+            services.AddSwaggerGen();
         }
 
 
@@ -57,6 +53,10 @@ namespace FixedBookingsAPI
 
             app.UseHttpsRedirection();
 
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -66,13 +66,7 @@ namespace FixedBookingsAPI
                 endpoints.MapControllers();
             });
 
-            app.UseSwagger();
 
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Demo API");
-                options.RoutePrefix = "";
-            });
         }
     }
 }
