@@ -68,6 +68,7 @@ namespace FixedBookings.Service.API.Controllers
         [Route("update/{id}")]
         public async Task<IActionResult> UpdateAsync(long Id, BookingModel model)
         {
+            model.Id = Id;
 
             var isValidModel = await _bookingService.GetByOrderedDate(model.StartDate, model.EndDate);
             if (isValidModel != null)
