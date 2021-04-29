@@ -17,7 +17,10 @@ namespace FixedBookings.BusinessLogic.Services
 
         public Task<IReadOnlyCollection<Booking>> GetAllAsync(PaginationFilter paginationFilter)
         {
-            throw new NotImplementedException();
+            IReadOnlyCollection<Booking> readOnlyBooking = new ReadOnlyCollection<Booking>(bookings
+                .Skip((paginationFilter.PageNumber - 1) * paginationFilter.PageSize)
+                .Take(paginationFilter.PageSize).ToList());
+            return Task.FromResult(readOnlyBooking);
         }
 
         public Task<Booking> GetByIdAsync(long Id)
@@ -47,5 +50,9 @@ namespace FixedBookings.BusinessLogic.Services
             throw new NotImplementedException();
         }
 
+        public Task<Booking> GetByOrderedDate(DateTime startDate, DateTime endDate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

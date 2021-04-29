@@ -12,22 +12,30 @@ namespace FixedBookings.Service.API.Mappings
     {
         public static BookingModel ToModel(this Booking model)
         {
-            return model != null ? new BookingModel {
-                Id = model.Id, Comments = model.Comments, 
-                CustomerName = model.CustomerName, EndDate = model.EndDate, 
-                FieldName = model.FieldName, PhoneNumber = model.PhoneNumber,
-                StartDate = model.StartDate, CreationDate = model.CreationDate,
-                IsActive = model.IsActive } : null;
+            return model != null ? new BookingModel
+            {
+                Id = model.Id,
+                Comments = model.Comments,
+                CustomerName = model.CustomerName,
+                EndDate = model.EndDate,
+                FieldName = model.FieldName,
+                PhoneNumber = model.PhoneNumber,
+                StartDate = model.StartDate
+            } : null;
         }
 
         public static Booking ToServiceModel(this BookingModel model)
         {
-            return model != null ? new Booking { 
-                Id = model.Id, Comments = model.Comments, 
-                CustomerName = model.CustomerName, EndDate = model.EndDate, 
-                FieldName = model.FieldName, PhoneNumber = model.PhoneNumber, 
-                StartDate = model.StartDate, CreationDate = model.CreationDate,
-                IsActive = model.IsActive } : null;
+            return model != null ? new Booking
+            {
+                Id = model.Id,
+                Comments = model.Comments,
+                CustomerName = model.CustomerName,
+                EndDate = model.EndDate,
+                FieldName = model.FieldName,
+                PhoneNumber = model.PhoneNumber,
+                StartDate = model.StartDate
+            } : null;
         }
 
         public static IReadOnlyCollection<BookingModel> ToModel(this IReadOnlyCollection<Booking> models)

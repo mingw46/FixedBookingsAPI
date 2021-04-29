@@ -16,7 +16,6 @@ namespace FixedBookings.BusinessObject.Interfaces
         Task<Booking> UpdateAsync(Booking booking);
         Task<Booking> DisableAsync(long Id);
         Task<IReadOnlyCollection<Booking>> DisableWholeBatchAsync(string userName);
-
-
+        Task<Booking> GetByOrderedDate(DateTime startDate, DateTime endDate);
     }
 }

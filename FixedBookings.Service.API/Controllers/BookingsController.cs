@@ -50,15 +50,32 @@ namespace FixedBookings.Service.API.Controllers
         public async Task<IActionResult> AddAsync(BookingModel model)
         {
             model.Id = 0;
+
+            var isValidModel = await _bookingService.GetByOrderedDate(model.StartDate, model.EndDate);
+            if (isValidModel != null)
+            {
+                ModelState.AddModelError("InvalidDate", "Event was already registred between selected date, you must change your date.");
+                return BadRequest(ModelState);
+            }
+
+
             var booking = await _bookingService.AddAsync(model.ToServiceModel());
 
-            return CreatedAtAction(nameof(GetByIdAsync), new { id = booking.Id }, booking.ToModel());
+            return CreatedAtAction("getbyid", new { id = booking.Id }, booking);
         }
 
         [HttpPut]
         [Route("update/{id}")]
-        public async Task<IActionResult> UpdateAsync(long i, BookingModel model)
+        public async Task<IActionResult> UpdateAsync(long Id, BookingModel model)
         {
+
+            var isValidModel = await _bookingService.GetByOrderedDate(model.StartDate, model.EndDate);
+            if (isValidModel != null)
+            {
+                ModelState.AddModelError("InvalidDate", "Event was already registred between selected dates, you must change your date.");
+                return BadRequest(ModelState);
+            }
+
             var booking = await _bookingService.UpdateAsync(model.ToServiceModel());
 
             return Ok(booking.ToModel());

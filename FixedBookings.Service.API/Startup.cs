@@ -1,6 +1,7 @@
 using FixedBookings.BusinessLogic.Services;
 using FixedBookings.BusinessObject.Interfaces;
 using FixedBookings.DataAccess;
+using FixedBookings.Service.API.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,13 @@ namespace FixedBookingsAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ApiExceptionFilter>();
+
+            var mvcBuilder = services.AddMvcCore(options =>
+            {
+                options.Filters.AddService<ApiExceptionFilter>();
+            });
+
             services.AddControllers();
 
 
